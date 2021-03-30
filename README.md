@@ -1,5 +1,5 @@
 # T-Rex Phaser
-
+Game T-Rex runner using Phaser engine
 
 
 ## Requirements

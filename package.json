@@ -1,5 +1,5 @@
 {
-  "name": "phaser3-project-template",
+  "name": "t-rex-phaser",
   "version": "1.1.2",
   "description": "A Phaser 3 Project Template",
   "main": "src/index.js",
@@ -9,15 +9,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/photonstorm/phaser3-project-template.git"
+    "url": "git+https://github.com/vietnguyen2000/T-Rex-Phaser.git"
   },
   "author": "Richard Davey <rdavey@gmail.com> (http://www.photonstorm.com)",
   "license": "MIT",
   "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
-  "bugs": {
-    "url": "https://github.com/photonstorm/phaser3-project-template/issues"
-  },
-  "homepage": "https://github.com/photonstorm/phaser3-project-template#readme",
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/preset-env": "^7.7.1",
@@ -33,6 +29,6 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "phaser": "^3.50.0"
+    "phaser": "^3.54.0"
   }
 }
