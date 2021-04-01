@@ -1,5 +1,4 @@
-import MyGameObject from './MyGameObject';
-import imageName from '../constant/imageName';
+import imageName from '../../constant/imageName';
 
 class Ground extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y) {

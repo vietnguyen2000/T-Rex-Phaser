@@ -1,4 +1,3 @@
-import MyGameObject from '../MyGameObject';
 import imageName from '../../constant/imageName';
 import animationName from '../../constant/animationName';
 
@@ -21,7 +20,7 @@ class Dinosaur extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this);
         this.body.setCollideWorldBounds(true);
         this.body.setGravityY(1000);
-        this.play(animationName.DinoSaurAnimation.run, true);
+        this.play(animationName.DinosaurAnimation.run, true);
         this.body.setSize(this.width,this.height);
 
         this.keyUp = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP)
@@ -39,26 +38,26 @@ class Dinosaur extends Phaser.GameObjects.Sprite {
 
     initAnimation() {
         let config_animation = {
-            key: animationName.DinoSaurAnimation.run,
+            key: animationName.DinosaurAnimation.run,
             frames: this.scene.anims.generateFrameNumbers(imageName.dinosaur, {start:2, end: 3, first:0}),
             frameRate: 12,
             repeat: -1,
         }
         this.scene.anims.create(config_animation);
         config_animation = {
-            key: animationName.DinoSaurAnimation.jump,
+            key: animationName.DinosaurAnimation.jump,
             frames: this.scene.anims.generateFrameNumbers(imageName.dinosaur, {start:0, end: 0, first:0}),
             frameRate: 60,
         }
         this.scene.anims.create(config_animation);
         config_animation = {
-            key: animationName.DinoSaurAnimation.die,
+            key: animationName.DinosaurAnimation.die,
             frames: this.scene.anims.generateFrameNumbers(imageName.dinosaur, {start:4, end: 5, first:0}),
             frameRate: 12,
         }
         this.scene.anims.create(config_animation);
         config_animation = {
-            key: animationName.DinoSaurAnimation.crouch,
+            key: animationName.DinosaurAnimation.crouch,
             frames: this.scene.anims.generateFrameNumbers(imageName.dinosaurCrouch, {start:0, end: 1, first:0}),
             frameRate: 12,
             repeat: -1
@@ -68,7 +67,7 @@ class Dinosaur extends Phaser.GameObjects.Sprite {
 
     jump() {
         this.body.setVelocityY(-300);
-        this.play(animationName.DinoSaurAnimation.jump, true);
+        this.play(animationName.DinosaurAnimation.jump, true);
     }
     
 

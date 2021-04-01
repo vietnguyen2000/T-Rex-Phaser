@@ -6,9 +6,9 @@ export default class RunState extends State{
         this.dinosaur.jump();
     }
     down() {
-        this.dinosaur.play(animationName.DinoSaurAnimation.crouch, true);
+        this.dinosaur.play(animationName.DinosaurAnimation.crouch, true);
     }
     notDown() {
-        this.dinosaur.play(animationName.DinoSaurAnimation.run, true);
+        this.dinosaur.play(animationName.DinosaurAnimation.run, true);
     }
 }

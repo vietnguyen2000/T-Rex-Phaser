@@ -1,8 +1,12 @@
-const DinoSaurAnimation = {
+const DinosaurAnimation = {
     run: 'dinosaurAnimationRun',
     jump: 'dinosaurAnimationJump',
     die: 'dinosaurAnimationDie',
     crouch: 'dinosaurAnimationCrouch',
 }
 
-export default {DinoSaurAnimation};
+const BirdAnimation = {
+    fly: 'birdAnimationFly',
+}
+
+export default {DinosaurAnimation, BirdAnimation};
