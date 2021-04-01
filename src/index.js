@@ -8,6 +8,12 @@ const config = {
     height: 150,
     scene: TRex,
     backgroundColor: 0xFFFFFF,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            debug: true
+        }
+    },
 };
 
 const game = new Phaser.Game(config);

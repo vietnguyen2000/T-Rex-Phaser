@@ -1,5 +1,6 @@
 const IMG_NAME = {
-    LOGO: 'logo',
+    dinosaur: 'dinosaur',
+    dinosaurCrouch: 'dinosaurCrouch'
 }
 
 export default IMG_NAME
