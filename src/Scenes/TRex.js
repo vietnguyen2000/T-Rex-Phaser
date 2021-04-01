@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import Dinosaur from '../GameObjects/Dinosaur';
+import Dinosaur from '../GameObjects/Dinosaur/Dinosaur';
 import Ground from '../GameObjects/Ground';
 class TRex extends Phaser.Scene
 {
@@ -10,6 +10,7 @@ class TRex extends Phaser.Scene
 
     init() 
     {
+      
     }
 
     preload ()
@@ -21,7 +22,7 @@ class TRex extends Phaser.Scene
     create ()
     {
         this.physics.world.setBounds(0, 0, 600, 140);
-        this.dinosaur = new Dinosaur(this, 30, 100);
+        this.dinosaur = new Dinosaur(this, 50, 50);
         this.ground = new Ground(this, 600, 140);
 
         // this.physics.add.collider(this.dinosaur,this.ground)
@@ -29,18 +30,7 @@ class TRex extends Phaser.Scene
     }
 
     update(time, delta) {
-    }
-
-    _register(name, typ) {
-        Phaser.GameObjects.GameObjectFactory.register(name, function (x, y)
-        {
-            let gameObject = new typ(this.scene, x, y);
-    
-            this.displayList.add(gameObject);
-            this.updateList.add(gameObject);
-    
-            return gameObject;
-        });
+        this.dinosaur.update(time, delta);
     }
 
 }

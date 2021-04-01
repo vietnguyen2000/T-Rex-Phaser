@@ -14,8 +14,8 @@ class Ground extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);
         // this.body.setCollideWorldBounds(true);
         this.body.setGravityY(0);
-        // this.body.setSize(590,10)
-        // this.body.setOffset(0,15);
+        this.body.setSize(0,0)
+        this.body.setOffset(0,15);
         this.speed = 300;
         this.setSpeedX(this.speed);
     }
