@@ -1,6 +1,12 @@
 import Phaser from 'phaser';
 import Dinosaur from '../GameObjects/Dinosaur/Dinosaur';
 import Ground from '../GameObjects/Ground';
+import dinosaur_spritesheet from '../assets/Dinosaur/Dinosaur_44x47x6.png';
+import dinosaurCrouch_spritesheet from '../assets/Dinosaur/DinosaurCrouch_59x30x2.png';
+import imageName from '../constant/imageName';
+import animationName from '../constant/animationName';
+import groundImage from '../assets/Ground/Ground.png'
+
 class TRex extends Phaser.Scene
 {
     constructor ()
@@ -15,8 +21,10 @@ class TRex extends Phaser.Scene
 
     preload ()
     {
-        Dinosaur.preload(this)
-        Ground.preload(this)
+        this.load.spritesheet(imageName.dinosaur, dinosaur_spritesheet, {frameWidth: 44, frameHeight: 47});
+        this.load.spritesheet(imageName.dinosaurCrouch, dinosaurCrouch_spritesheet, {frameWidth: 59, frameHeight: 30});
+
+        this.load.spritesheet(imageName.ground, groundImage, {frameWidth: 2400, frameHeight: 15});
     }
       
     create ()

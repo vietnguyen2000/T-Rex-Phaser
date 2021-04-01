@@ -1,7 +1,5 @@
 import MyGameObject from './MyGameObject';
 import imageName from '../constant/imageName';
-import animationName from '../constant/animationName';
-import groundImage from '../assets/Ground/Ground.png'
 
 class Ground extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y) {
@@ -20,7 +18,7 @@ class Ground extends Phaser.GameObjects.Sprite {
         this.setSpeedX(this.speed);
     }
     static preload(scene) {
-        scene.load.spritesheet(imageName.ground, groundImage, {frameWidth: 2400, frameHeight: 15});
+
     }
     setSpeedX(speed) {
         this.body.setVelocityX(-speed);
@@ -28,6 +26,7 @@ class Ground extends Phaser.GameObjects.Sprite {
     }
 
     preUpdate(time, delta) {
+        super.preUpdate(time,delta);
         if (this.x <= -600) this.setX(this.x+=1200);
     }
 

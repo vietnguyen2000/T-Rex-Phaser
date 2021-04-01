@@ -1,8 +1,7 @@
 import MyGameObject from '../MyGameObject';
 import imageName from '../../constant/imageName';
 import animationName from '../../constant/animationName';
-import dinosaur_spritesheet from '../../assets/Dinosaur/Dinosaur_44x47x6.png';
-import dinosaurCrouch_spritesheet from '../../assets/Dinosaur/DinosaurCrouch_59x30x2.png';
+
 import RunState from './DinosaurState/RunState';
 import JumpState from './DinosaurState/JumpState';
 import IdleState from './DinosaurState/IdleState';
@@ -36,10 +35,6 @@ class Dinosaur extends Phaser.GameObjects.Sprite {
             die: new DieState(this)
         }
         this.state = this.states.idle;
-    }
-    static preload(scene) {
-        scene.load.spritesheet(imageName.dinosaur, dinosaur_spritesheet, {frameWidth: 44, frameHeight: 47});
-        scene.load.spritesheet(imageName.dinosaurCrouch, dinosaurCrouch_spritesheet, {frameWidth: 59, frameHeight: 30});
     }
 
     initAnimation() {
