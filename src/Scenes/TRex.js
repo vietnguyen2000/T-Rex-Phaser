@@ -20,11 +20,15 @@ class TRex extends Phaser.Scene
       
     create ()
     {
+        this.physics.world.setBounds(0, 0, 600, 140);
         this.dinosaur = new Dinosaur(this, 30, 100);
         this.ground = new Ground(this, 600, 140);
 
-        this.physics.add.collider(this.dinosaur,this.ground)
+        // this.physics.add.collider(this.dinosaur,this.ground)
         
+    }
+
+    update(time, delta) {
     }
 
     _register(name, typ) {
