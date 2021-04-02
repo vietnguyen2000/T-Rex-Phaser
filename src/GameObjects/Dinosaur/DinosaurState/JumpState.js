@@ -8,7 +8,7 @@ export default class JumpState extends State{
     up() {
         
         if (this.dinosaur.y > this.maxHeightBoost) {
-            this.dinosaur.jump();
+            this.dinosaur.boostJump();
         }
     }
     down() {

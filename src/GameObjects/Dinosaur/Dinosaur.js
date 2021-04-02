@@ -1,11 +1,12 @@
 import imageName from '../../constant/imageName';
 import animationName from '../../constant/animationName';
-
+import audioName from '../../constant/audioName';
 import RunState from './DinosaurState/RunState';
 import JumpState from './DinosaurState/JumpState';
 import IdleState from './DinosaurState/IdleState';
 import FallState from './DinosaurState/FallState';
 import DieState from './DinosaurState/DieState';
+
 
 class Dinosaur extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y) {
@@ -36,6 +37,8 @@ class Dinosaur extends Phaser.GameObjects.Sprite {
             die: new DieState(this)
         }
         this.state = this.states.idle;
+
+        this.jumpSound = this.scene.sound.add(audioName.buttonPress);
     }
 
     initAnimation() {
@@ -76,6 +79,11 @@ class Dinosaur extends Phaser.GameObjects.Sprite {
     jump() {
         this.body.setVelocityY(-300);
         this.play(animationName.DinosaurAnimation.jump, true);
+        this.jumpSound.play();
+    }
+
+    boostJump() {
+        this.body.setVelocityY(-300);
     }
     
 

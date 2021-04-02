@@ -1,7 +1,7 @@
 import { Time } from "phaser";
 import Bird from "../Obstacles/Bird/Bird";
 import Cactus from "../Obstacles/Cactus/Cactus";
-
+import audioName from "../../constant/audioName";
 export default class GameManager {
     constructor(scene, obj) {
         this.scene = scene;
@@ -24,11 +24,13 @@ export default class GameManager {
         this.currentSpeed = this.baseSpeed;
         this._score = 0;
         this._highScore = 0;
-        this._timeStart = -1;
 
         this.status = 'running';
 
         this.scene.events.on('resume', this.replay(this));
+
+        this.hitSound = this.scene.sound.add(audioName.hit);
+        this.scoreReachedSound = this.scene.sound.add(audioName.scoreReached);
     }
 
     generateObstacleByTime(delta) {
@@ -71,7 +73,6 @@ export default class GameManager {
     replay(){
         return ()=>{
             this.setScore(0);
-            this._timeStart = -1;
             this.obstacles.forEach(this.disable);
             this.disable(this.currentObstacle);
             this.currentObstacle = null;
@@ -80,18 +81,19 @@ export default class GameManager {
             this.status = 'running';
         }
     } 
-    updateScore(time) {
+    updateScore(delta) {
         if (this.status == 'running') {
-            if (this._timeStart == -1) {
-                this._timeStart = time;
-            }
-            this.setScore((time-this._timeStart)/10);    
+            this.setScore(this._score+delta/100);    
         }
         
     }
     setScore(score) {
-        this._score = Math.floor(Number(score));
-        this.score.setScore(this._score);
+        // console.log(Math.ceil(this._score/10), Math.ceil(score/10))
+        if (Math.ceil(this._score/100) == Math.floor(score/100)) {
+            this.scoreReachedSound.play();
+        }
+        this._score = Number(score);
+        this.score.setScore(Math.floor(this._score));
     }
     setHighScore() {
         this._highScore = Math.max(this._highScore, this._score);
@@ -100,13 +102,14 @@ export default class GameManager {
 
     touchOtacles(){
         return (col1, col2) => {
+            this.hitSound.play();
             this.gameOver();
         }
     } 
 
 
     update(time, delta) {
-        this.updateScore(time);
+        this.updateScore(delta);
         this.generateObstacleByTime(delta);
         if (this.currentObstacle != null){
             if (this.currentObstacle.x < -10) {

@@ -6,6 +6,7 @@ import dinosaur_spritesheet from '../assets/Dinosaur/Dinosaur_44x47x6.png';
 import dinosaurCrouch_spritesheet from '../assets/Dinosaur/DinosaurCrouch_59x30x2.png';
 import imageName from '../constant/imageName';
 import animationName from '../constant/animationName';
+import audioName from '../constant/audioName';
 import groundImage from '../assets/Ground/Ground.png';
 import cactus_spritesheet from '../assets/Cactus/Cactus_25x52x5.png';
 import bird_spritesheet from '../assets/Bird/Bird_46x40x2.png';
@@ -13,7 +14,6 @@ import number_spritesheet from '../assets/Number/Number_9x11x11.png';
 import Score from '../GameObjects/Number/Score';
 import HighScore from '../GameObjects/Number/HighScore';
 import LoadingScreen from './LoadingScreen';
-
 
 class TRex extends Phaser.Scene
 {
@@ -38,6 +38,10 @@ class TRex extends Phaser.Scene
 
         this.load.spritesheet(imageName.number, number_spritesheet, {frameWidth: 9, frameHeight: 11})
 
+        this.load.audio(audioName.buttonPress, './src/assets/Sound/button-press.mp3');
+        this.load.audio(audioName.hit, './src/assets/Sound/hit.mp3');
+        this.load.audio(audioName.scoreReached, './src/assets/Sound/score-reached.mp3');
+
         for (var i = 0; i < 100; i++) {
             this.load.image('logo'+i, './src/assets/logo.png');
         }
@@ -45,6 +49,8 @@ class TRex extends Phaser.Scene
         let loadingScreen = new LoadingScreen(this);
         this.load.on('progress', loadingScreen.progress(loadingScreen));
         this.load.on('complete', loadingScreen.complete(loadingScreen));
+
+
 
     }
       
@@ -65,10 +71,7 @@ class TRex extends Phaser.Scene
         this.scene.sleep('gameOver');
         
         this.gameManager = new GameManager(this, {dinosaur: this.dinosaur, ground: this.ground, score: this.score, highScore: this.highScore})
-        // this.physics.add.collider(this.dinosaur,this.ground)
 
-        
-        
     }
 
     update(time, delta) {
