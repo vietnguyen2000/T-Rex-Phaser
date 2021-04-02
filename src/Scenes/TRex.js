@@ -9,7 +9,9 @@ import animationName from '../constant/animationName';
 import groundImage from '../assets/Ground/Ground.png';
 import cactus_spritesheet from '../assets/Cactus/Cactus_25x52x5.png';
 import bird_spritesheet from '../assets/Bird/Bird_46x40x2.png';
-
+import number_spritesheet from '../assets/Number/Number_9x11x11.png';
+import Score from '../GameObjects/Number/Score';
+import HighScore from '../GameObjects/Number/HighScore';
 
 
 class TRex extends Phaser.Scene
@@ -33,16 +35,24 @@ class TRex extends Phaser.Scene
         this.load.spritesheet(imageName.cactus, cactus_spritesheet, {frameWidth: 25, frameHeight: 52})
         this.load.spritesheet(imageName.bird, bird_spritesheet, {frameWidth: 46, frameHeight:40})
 
+        this.load.spritesheet(imageName.number, number_spritesheet, {frameWidth: 9, frameHeight: 11})
+
     }
       
     create ()
     {
+        
+
         this.physics.world.setBounds(0, 0, 600, 140);
         this.dinosaur = new Dinosaur(this, 50, 140);
         this.ground = new Ground(this, 600, 140);
+        this.score = new Score(this, 550, 20);
+        this.highScore = new HighScore(this, 490, 20);
+
         this.scene.launch('gameOver');
         this.scene.sleep('gameOver');
-        this.gameManager = new GameManager(this, {dinosaur: this.dinosaur, ground: this.ground})
+        
+        this.gameManager = new GameManager(this, {dinosaur: this.dinosaur, ground: this.ground, score: this.score, highScore: this.highScore})
         // this.physics.add.collider(this.dinosaur,this.ground)
         
     }

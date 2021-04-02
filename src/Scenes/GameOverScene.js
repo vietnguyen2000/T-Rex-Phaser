@@ -9,7 +9,6 @@ class GameOverScene extends Phaser.Scene {
         super({key: 'gameOver'})
     }
     preload() {
-        console.log('gameover preload')
         this.load.image(imageName.gameOver, gameOver_image);
         this.load.image(imageName.replay, replay_image);
         
