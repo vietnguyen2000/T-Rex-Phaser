@@ -16,7 +16,8 @@ export default class GameManager {
         this.obstacles = [];
         this.scene.physics.add.overlap(this.dinosaur,this.cactuses,this.touchOtacles(this))
         this.scene.physics.add.overlap(this.dinosaur,this.birds,this.touchOtacles(this))
-        this.rateGenerate = 1.2;
+        this.baseRate= 1.2;
+        this.rateGenerate = this.baseRate;
         this._currentRate = this.rateGenerate;
         this._timeCountGenerate = 0;
 
@@ -48,15 +49,18 @@ export default class GameManager {
         else {
             this.generateBird();
         }
+        this._currentRate = (Math.random() + 0.5)*this.rateGenerate;
     }
     generateCactus() {
         let cactus = this.cactuses.getFirstDead(true, 600, 140);
         this.obstacles.push(cactus)
+        cactus.setSpeed(this.currentSpeed)
         this.enable(cactus);
     }
     generateBird() {
         let bird = this.birds.getFirstDead(true, 600, Math.random()*90+50);
         this.obstacles.push(bird)
+        bird.setSpeed(this.currentSpeed)
         this.enable(bird);
     }
     gameOver() {
@@ -97,15 +101,58 @@ export default class GameManager {
     }
     setHighScore() {
         this._highScore = Math.max(this._highScore, this._score);
-        this.highScore.setScore(this._highScore);
+        this.highScore.setScore(Math.floor(this._highScore));
     }
 
     touchOtacles(){
         return (col1, col2) => {
-            this.hitSound.play();
-            this.gameOver();
+            if (this.checkOverlapPixel(col1, col2)) {
+                this.hitSound.play();
+                this.gameOver();
+                this.dinosaur.state = this.dinosaur.states.die;
+            }
+            
         }
     } 
+
+    checkOverlapPixel(col1, col2) {
+        let rect1 = {
+            x: col1.x,
+            y: col1.y,
+            width: col1.width,
+            height: col1.height,
+        }
+        let rect2 = {
+            x: col2.x,
+            y: col2.y,
+            width: col2.width,
+            height: col2.height,
+        }
+        let iMin = Math.floor(Math.max(rect1.x,rect2.x));
+        let iMax = Math.floor(Math.min(rect1.x+rect1.width, rect2.x+rect2.width));
+        let jMin = Math.floor(Math.max(rect1.y, rect2.y));
+        let jMax = Math.floor(Math.min(rect1.y + rect1.height, rect2.y +rect2.height));
+        for (let i = iMin+1; i < iMax; i++) 
+        {
+            for (let j = jMin+1; 
+                j < jMax;
+                j++)
+            {
+                if (!this.isTransparent(col1.getPixel(i-rect1.x, j-rect1.y)) &&
+                    !this.isTransparent(col2.getPixel(i-rect2.x, j-rect2.y)))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    isTransparent(color) {
+        if (color.a == 0) return true;
+        if (color.r < 150 && color.g < 150 && color.b < 150) return false;
+        return true;
+    }
 
 
     update(time, delta) {
@@ -122,6 +169,12 @@ export default class GameManager {
         }
         
     }
+
+    updateSpeed() {
+        this.currentSpeed = (this._score/10+1)*this.baseSpeed;
+        this.rateGenerate = (this._score/10+1)*this.baseRate;
+    }
+
     getNewCurrentObstacles() {
         if (this.obstacles.length > 0) {
             this.currentObstacle = this.obstacles.shift();

@@ -6,7 +6,8 @@ const IMG_NAME = {
     bird: 'bird',
     gameOver: 'gameOver',
     replay: 'replay',
-    number: 'number'
+    number: 'number',
+    cloud: 'cloud'
 }
 
 export default IMG_NAME

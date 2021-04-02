@@ -1,7 +1,8 @@
 import imageName from '../../../constant/imageName';
 import animationName from '../../../constant/animationName';
+import Obstacle from '../Obstacle';
 
-export default class Bird extends Phaser.GameObjects.Sprite {
+export default class Bird extends Obstacle {
     constructor(scene, x = 650, y = 140) {
         super(scene, x, y, imageName.bird);
         this.initAnimation();
@@ -25,8 +26,5 @@ export default class Bird extends Phaser.GameObjects.Sprite {
         this.body.setSize(this.width,this.height);
         this.speed = 300;
         this.setSpeed(this.speed);
-    }
-    setSpeed(speed) {
-        this.body.setVelocityX(-speed);
     }
 }

@@ -14,7 +14,8 @@ import number_spritesheet from '../assets/Number/Number_9x11x11.png';
 import Score from '../GameObjects/Number/Score';
 import HighScore from '../GameObjects/Number/HighScore';
 import LoadingScreen from './LoadingScreen';
-
+import CloudImage from '../assets/Cloud/Cloud.png';
+import Cloud from '../GameObjects/Cloud/Cloud';
 class TRex extends Phaser.Scene
 {
     constructor ()
@@ -38,6 +39,8 @@ class TRex extends Phaser.Scene
 
         this.load.spritesheet(imageName.number, number_spritesheet, {frameWidth: 9, frameHeight: 11})
 
+        this.load.image(imageName.cloud, CloudImage);
+
         this.load.audio(audioName.buttonPress, './src/assets/Sound/button-press.mp3');
         this.load.audio(audioName.hit, './src/assets/Sound/hit.mp3');
         this.load.audio(audioName.scoreReached, './src/assets/Sound/score-reached.mp3');
@@ -50,12 +53,14 @@ class TRex extends Phaser.Scene
         this.load.on('progress', loadingScreen.progress(loadingScreen));
         this.load.on('complete', loadingScreen.complete(loadingScreen));
 
-
-
     }
       
     create ()
     {
+        
+        let cloud1 = new Cloud(this, 650, 40, 15);
+        let cloud2 = new Cloud(this, 600, 60, 20);
+        let cloud3 = new Cloud(this, 700, 80, 10);
         
         this.textures.each((texture) => {
 
@@ -71,6 +76,7 @@ class TRex extends Phaser.Scene
         this.scene.sleep('gameOver');
         
         this.gameManager = new GameManager(this, {dinosaur: this.dinosaur, ground: this.ground, score: this.score, highScore: this.highScore})
+
 
     }
 

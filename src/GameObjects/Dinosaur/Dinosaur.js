@@ -36,7 +36,7 @@ class Dinosaur extends Phaser.GameObjects.Sprite {
             fall: new FallState(this),
             die: new DieState(this)
         }
-        this.state = this.states.idle;
+        this.state = this.states.run;
 
         this.jumpSound = this.scene.sound.add(audioName.buttonPress);
     }
@@ -105,6 +105,10 @@ class Dinosaur extends Phaser.GameObjects.Sprite {
         else {
             this.state.notDown();
         }
+    }
+
+    getPixel(x, y) {
+        return this.scene.textures.getPixel(x,y,this.texture.key,this.anims.currentFrame.frame.sourceIndex)
     }
 
 
