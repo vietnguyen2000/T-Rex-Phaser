@@ -12,6 +12,7 @@ import bird_spritesheet from '../assets/Bird/Bird_46x40x2.png';
 import number_spritesheet from '../assets/Number/Number_9x11x11.png';
 import Score from '../GameObjects/Number/Score';
 import HighScore from '../GameObjects/Number/HighScore';
+import LoadingScreen from './LoadingScreen';
 
 
 class TRex extends Phaser.Scene
@@ -36,6 +37,14 @@ class TRex extends Phaser.Scene
         this.load.spritesheet(imageName.bird, bird_spritesheet, {frameWidth: 46, frameHeight:40})
 
         this.load.spritesheet(imageName.number, number_spritesheet, {frameWidth: 9, frameHeight: 11})
+
+        for (var i = 0; i < 100; i++) {
+            this.load.image('logo'+i, './src/assets/logo.png');
+        }
+
+        let loadingScreen = new LoadingScreen(this);
+        this.load.on('progress', loadingScreen.progress(loadingScreen));
+        this.load.on('complete', loadingScreen.complete(loadingScreen));
 
     }
       
