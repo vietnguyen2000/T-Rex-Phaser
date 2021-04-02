@@ -11,8 +11,8 @@ export default class GameManager {
         this.birds = this.scene.add.group({classType: Bird, defaultKey: 'cactuses'})
         this.currentObstacle = null;
         this.obstacles = [];
-        this.scene.physics.add.overlap(this.dinosaur,this.cactuses,this.touchOtacles)
-        this.scene.physics.add.overlap(this.dinosaur,this.birds,this.touchOtacles)
+        this.scene.physics.add.overlap(this.dinosaur,this.cactuses,this.touchOtacles(this))
+        this.scene.physics.add.overlap(this.dinosaur,this.birds,this.touchOtacles(this))
         this.rateGenerate = 1.2;
         this._currentRate = this.rateGenerate;
         this._timeCountGenerate = 0;
@@ -20,6 +20,8 @@ export default class GameManager {
         this.baseSpeed = 300;
         this.currentSpeed = this.baseSpeed;
         this.score = 0;
+
+        this.scene.events.on('resume', this.replay(this));
     }
 
     generateObstacleByTime(delta) {
@@ -48,11 +50,32 @@ export default class GameManager {
         this.obstacles.push(bird)
         this.enable(bird);
     }
-    
-
-    touchOtacles(col1, col2) {
-        console.log('DIE')
+    gameOver() {
+        this.pauseGame();
+        this.scene.scene.wake('gameOver');
     }
+
+    pauseGame() {
+        this.scene.scene.pause();
+    }
+
+    replay(){
+        return ()=>{
+            console.log('replay')
+            this.obstacles.forEach(this.disable);
+            this.disable(this.currentObstacle);
+            this.currentObstacle = null;
+            this.obstacles = [];
+            this.dinosaur.reset();
+        }
+    } 
+
+    touchOtacles(gameManager){
+        return (col1, col2) => {
+            gameManager.gameOver();
+        }
+    } 
+
 
     update(time, delta) {
         this.generateObstacleByTime(delta);

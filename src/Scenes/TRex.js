@@ -6,20 +6,21 @@ import dinosaur_spritesheet from '../assets/Dinosaur/Dinosaur_44x47x6.png';
 import dinosaurCrouch_spritesheet from '../assets/Dinosaur/DinosaurCrouch_59x30x2.png';
 import imageName from '../constant/imageName';
 import animationName from '../constant/animationName';
-import groundImage from '../assets/Ground/Ground.png'
-import cactus_spritesheet from '../assets/Cactus/Cactus_25x52x5.png'
-import bird_spritesheet from '../assets/Bird/Bird_46x40x2.png'
+import groundImage from '../assets/Ground/Ground.png';
+import cactus_spritesheet from '../assets/Cactus/Cactus_25x52x5.png';
+import bird_spritesheet from '../assets/Bird/Bird_46x40x2.png';
+
+
 
 class TRex extends Phaser.Scene
 {
     constructor ()
     {
-        super();
+        super({key: 'default'});
     }
 
     init() 
     {
-      
     }
 
     preload ()
@@ -31,14 +32,17 @@ class TRex extends Phaser.Scene
 
         this.load.spritesheet(imageName.cactus, cactus_spritesheet, {frameWidth: 25, frameHeight: 52})
         this.load.spritesheet(imageName.bird, bird_spritesheet, {frameWidth: 46, frameHeight:40})
+
     }
       
     create ()
     {
         this.physics.world.setBounds(0, 0, 600, 140);
-        this.dinosaur = new Dinosaur(this, 50, 50);
+        this.dinosaur = new Dinosaur(this, 50, 140);
         this.ground = new Ground(this, 600, 140);
-        this.gameManager = new GameManager(this, {dinosaur: this.dinosaur,ground: this.ground})
+        this.scene.launch('gameOver');
+        this.scene.sleep('gameOver');
+        this.gameManager = new GameManager(this, {dinosaur: this.dinosaur, ground: this.ground})
         // this.physics.add.collider(this.dinosaur,this.ground)
         
     }

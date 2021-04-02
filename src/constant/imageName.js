@@ -3,7 +3,9 @@ const IMG_NAME = {
     dinosaurCrouch: 'dinosaurCrouch',
     ground: 'ground',
     cactus: 'cactus',
-    bird: 'bird'
+    bird: 'bird',
+    gameOver: 'gameOver',
+    replay: 'replay',
 }
 
 export default IMG_NAME

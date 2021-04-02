@@ -10,6 +10,8 @@ import DieState from './DinosaurState/DieState';
 class Dinosaur extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y) {
         super(scene, x, y, imageName.dinosaur);
+        this.defaultX = x;
+        this.defaultY = y;
         this.initAnimation();
         this.initDinosaur();
         
@@ -63,6 +65,12 @@ class Dinosaur extends Phaser.GameObjects.Sprite {
             repeat: -1
         }
         this.scene.anims.create(config_animation);
+    }
+
+    reset() {
+        this.setX(this.defaultX);
+        this.setY(this.defaultY);
+        this.state = this.states.run;
     }
 
     jump() {
