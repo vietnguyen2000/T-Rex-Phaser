@@ -32,7 +32,6 @@ export default class LoadingScreen {
 
     progress() {
         return (value) => {
-            console.log(value);
             this.progressBar.clear();
             this.progressBar.fillStyle(0x000000, 1);
             this.progressBar.fillRect(150, 60, 300 * value, 30);
@@ -46,7 +45,6 @@ export default class LoadingScreen {
             this.progressBox.destroy();
             this.loadingText.destroy();
             this.percentText.destroy();
-            console.log('complete')
         }
         
     }
