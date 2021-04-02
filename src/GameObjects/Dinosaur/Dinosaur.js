@@ -74,6 +74,7 @@ class Dinosaur extends Phaser.GameObjects.Sprite {
         this.setX(this.defaultX);
         this.setY(this.defaultY);
         this.state = this.states.run;
+        this.body.setVelocityY(0);
     }
 
     jump() {
