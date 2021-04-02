@@ -42,7 +42,10 @@ class TRex extends Phaser.Scene
     create ()
     {
         
+        this.textures.each((texture) => {
 
+            texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+        })
         this.physics.world.setBounds(0, 0, 600, 140);
         this.dinosaur = new Dinosaur(this, 50, 140);
         this.ground = new Ground(this, 600, 140);
@@ -54,6 +57,8 @@ class TRex extends Phaser.Scene
         
         this.gameManager = new GameManager(this, {dinosaur: this.dinosaur, ground: this.ground, score: this.score, highScore: this.highScore})
         // this.physics.add.collider(this.dinosaur,this.ground)
+
+        
         
     }
 

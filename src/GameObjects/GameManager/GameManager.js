@@ -1,3 +1,4 @@
+import { Time } from "phaser";
 import Bird from "../Obstacles/Bird/Bird";
 import Cactus from "../Obstacles/Cactus/Cactus";
 
@@ -7,6 +8,8 @@ export default class GameManager {
         this.obj = obj;
         this.dinosaur = obj.dinosaur;
         this.ground = obj.ground;
+        this.score = obj.score;
+        this.highScore = obj.highScore;
         this.cactuses = this.scene.add.group({classType: Cactus, defaultKey: 'cactuses'})
         this.birds = this.scene.add.group({classType: Bird, defaultKey: 'cactuses'})
         this.currentObstacle = null;
@@ -19,7 +22,11 @@ export default class GameManager {
 
         this.baseSpeed = 300;
         this.currentSpeed = this.baseSpeed;
-        this.score = 0;
+        this._score = 0;
+        this._highScore = 0;
+        this._timeStart = -1;
+
+        this.status = 'running';
 
         this.scene.events.on('resume', this.replay(this));
     }
@@ -51,40 +58,61 @@ export default class GameManager {
         this.enable(bird);
     }
     gameOver() {
+        this.setHighScore();
         this.pauseGame();
         this.scene.scene.wake('gameOver');
     }
 
     pauseGame() {
         this.scene.scene.pause();
+        this.status = 'pause'
     }
 
     replay(){
         return ()=>{
-            console.log('replay')
+            this.setScore(0);
+            this._timeStart = -1;
             this.obstacles.forEach(this.disable);
             this.disable(this.currentObstacle);
             this.currentObstacle = null;
             this.obstacles = [];
             this.dinosaur.reset();
+            this.status = 'running';
         }
     } 
+    updateScore(time) {
+        if (this.status == 'running') {
+            if (this._timeStart == -1) {
+                this._timeStart = time;
+            }
+            this.setScore((time-this._timeStart)/10);    
+        }
+        
+    }
+    setScore(score) {
+        this._score = Math.floor(Number(score));
+        this.score.setScore(this._score);
+    }
+    setHighScore() {
+        this._highScore = Math.max(this._highScore, this._score);
+        this.highScore.setScore(this._highScore);
+    }
 
-    touchOtacles(gameManager){
+    touchOtacles(){
         return (col1, col2) => {
-            gameManager.gameOver();
+            this.gameOver();
         }
     } 
 
 
     update(time, delta) {
+        this.updateScore(time);
         this.generateObstacleByTime(delta);
         if (this.currentObstacle != null){
             if (this.currentObstacle.x < -10) {
                 this.disable(this.currentObstacle);
                 this.getNewCurrentObstacles();
             }
-            
         }
         else {
             this.getNewCurrentObstacles();

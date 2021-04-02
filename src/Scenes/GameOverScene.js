@@ -14,6 +14,9 @@ class GameOverScene extends Phaser.Scene {
         
     }
     create() {
+        this.textures.each((texture) => {
+            texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+        })
         this.gameOver = new GameOver(this, 300, 40);
         this.replay = new Replay(this, 300, 90);
         this.keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP)
