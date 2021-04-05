@@ -1,12 +1,12 @@
 const DinosaurAnimation = {
-    run: 'dinosaurAnimationRun',
-    jump: 'dinosaurAnimationJump',
-    die: 'dinosaurAnimationDie',
-    crouch: 'dinosaurAnimationCrouch',
+  run: 'dinosaurAnimationRun',
+  jump: 'dinosaurAnimationJump',
+  die: 'dinosaurAnimationDie',
+  crouch: 'dinosaurAnimationCrouch'
 }
 
 const BirdAnimation = {
-    fly: 'birdAnimationFly',
+  fly: 'birdAnimationFly'
 }
 
-export default {DinosaurAnimation, BirdAnimation};
+export default { DinosaurAnimation, BirdAnimation }

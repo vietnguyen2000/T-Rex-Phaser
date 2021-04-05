@@ -1,7 +1,7 @@
 const audioName = {
-    buttonPress: 'button-press',
-    hit: 'hit',
-    scoreReached: 'score-reached'
+  buttonPress: 'button-press',
+  hit: 'hit',
+  scoreReached: 'score-reached'
 }
 
-export default audioName;
+export default audioName
