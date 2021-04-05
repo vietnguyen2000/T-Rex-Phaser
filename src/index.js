@@ -11,7 +11,8 @@ const config = {
   backgroundColor: 0xFFFFFF,
   physics: {
     default: 'arcade'
-  }
+  },
+  render: { pixelArt: true, antialias: false }
 }
 
 const game = new Phaser.Game(config)
